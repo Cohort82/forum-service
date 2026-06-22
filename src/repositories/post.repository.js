@@ -9,3 +9,11 @@ export const createPost = async (postData) => {
 export const findPostById = async (id) => Post.findById(id).exec();
 
 export const deletePost = async (id) => Post.findByIdAndDelete(id).exec();
+
+export const addLike = async (id) => Post.findByIdAndUpdate(id, { $inc: { likes: 1 } }, { returnDocument: 'after' }).exec();
+
+export const findPostsByAuthor = async (author) => Post.find({ author: new RegExp(`^${author}$`, 'i') }).exec();
+
+export const addComment = async (id, comment) => {
+    return Post.findByIdAndUpdate(id, {$push: {comments: comment}}, {returnDocument: 'after'}).exec();
+}
