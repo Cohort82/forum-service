@@ -24,3 +24,10 @@ export const findPostsByTags = async (tags) => {
 }
 
 export const findPostsByPeriod = async (dateFrom, dateTo) => Post.find({dateCreated: {$gte: dateFrom, $lte: dateTo}}).exec();
+
+export const updatePost = async (id, updateData) => {
+    const tags = updateData.tags ?? [];
+    delete updateData.tags;
+    const data = {...updateData, $addToSet: {tags: tags}};
+    return Post.findByIdAndUpdate(id, data, {returnDocument: 'after'}).exec();
+}
