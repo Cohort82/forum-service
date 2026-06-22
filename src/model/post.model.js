@@ -34,6 +34,15 @@ const postSchema = new Schema({
         type: [Comment],
         default: [],
     }
+}, {
+    versionKey: false,
+    toJSON: {
+        transform: (doc, ret) => {
+            ret.id = doc.id;
+            delete ret._id;
+            ret.dateCreated = doc.dateCreated.toISOString().slice(0, 19);
+        }
+    }
 })
 
 export default model('Post', postSchema, 'posts');

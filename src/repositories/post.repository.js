@@ -5,3 +5,7 @@ export const createPost = async (postData) => {
     // return post.save();
     return Post.create(postData);
 }
+
+export const findPostById = async (id) => Post.findById(id).exec();
+
+export const deletePost = async (id) => Post.findByIdAndDelete(id).exec();
