@@ -17,3 +17,8 @@ export const findPostsByAuthor = async (author) => Post.find({ author: new RegEx
 export const addComment = async (id, comment) => {
     return Post.findByIdAndUpdate(id, {$push: {comments: comment}}, {returnDocument: 'after'}).exec();
 }
+
+export const findPostsByTags = async (tags) => {
+    const regexConditions = tags.map(tag => ({tags: new RegExp(`^${tag}$`, 'i')}));
+    return Post.find({$or: regexConditions}).exec();
+}
