@@ -43,5 +43,9 @@ export const changePassword = async (login, newPassword) => {
 }
 
 export const getUser = async (login) => {
-    // TODO: Implement user retrieval logic
+    const userAccount = await userAccountRepository.findUser(login);
+    if (!userAccount) {
+        throw new Error(`User with login '${login}' not found`);
+    }
+    return userAccount;
 }
