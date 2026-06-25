@@ -1,7 +1,1 @@
-export const hasRole = role => (req, res, next) => {
-    const check = req.principal.roles.includes(role.toUpperCase().trim());
-    console.log(check);
-    console.log(req.principal.roles);
-    console.log(role.toUpperCase().trim())
-    return check  ? next() : res.status(403).json({message: 'Access denied'});
-}
+export const hasRole = role => (req, res, next) => req.principal.roles.includes(role.toUpperCase().trim())  ? next() : res.status(403).json({message: 'Access denied'});

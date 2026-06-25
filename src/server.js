@@ -15,10 +15,11 @@ const authorizationRouter = express.Router();
 
 app.use(express.json());
 app.use(authentication);
-// authorizationRouter.patch('/account/user/:login/role/:role', hasRole(ADMIN))
-// authorizationRouter.delete('/account/user/:login/role/:role', hasRole(ADMIN))
-app.use('/account/user/:login/role/:role', hasRole(ADMIN));
 
+authorizationRouter.patch('/account/user/:login/role/:role', hasRole(ADMIN))
+authorizationRouter.delete('/account/user/:login/role/:role', hasRole(ADMIN))
+
+app.use(authorizationRouter);
 app.use('/forum', postRoutes);
 app.use('/account', userRoutes);
 
