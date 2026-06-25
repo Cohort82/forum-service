@@ -7,5 +7,6 @@ const router = Router();
 router.all('/account/user/:login/role/:role', hasRole(ADMIN));
 router.patch('/account/user/:user', isOwner('user'));
 router.delete('/account/user/:login', isOwnerOrHasRole('login', ADMIN));
+router.post('/forum/post/:author', isOwner('author'));
 
 export default router;
